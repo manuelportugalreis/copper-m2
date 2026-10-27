@@ -132,7 +132,11 @@ describe("check_availability", () => {
 
 describe("copperTools", () => {
   it("runs calculate_cost through its execute", async () => {
-    const execute = copperTools.calculate_cost.execute!;
+    // ToolSet types execute loosely, so call it with the shape the SDK passes.
+    const execute = copperTools.calculate_cost.execute as (
+      input: unknown,
+      options: unknown,
+    ) => Promise<unknown>;
     const result = await execute(
       {
         products: ["copper-home"],
